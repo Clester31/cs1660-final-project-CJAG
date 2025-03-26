@@ -2,6 +2,6 @@
 Final project for CS 1660
 
 * Akshitha - Docker / GCP
-* Grace - 
+* Grace - Architecture Diagram
 * Christian - Frontend
-* Julie
+* Julie - fASTAPI / python
