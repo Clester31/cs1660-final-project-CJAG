@@ -15,7 +15,7 @@ services:
     ports:
       - "9080:8000"
     volumes:
-      - ./cc_cloud_run:/app/attendance_tracker:Z
+      - ./cloud_run:/app/cloud_run:Z
       - ./static:/app/static:Z
       - ./template:/app/templates:Z
   db:
