@@ -1,7 +1,7 @@
 services:
   vote:
-    container_name: attendance
-    image: attendance
+    container_name: attendence
+    image: attendence
     build:
       context: .
     depends_on:
@@ -11,7 +11,7 @@ services:
       - FIRESTORE_EMULATOR_HOST=db:8080
       - ENVIRONMENT=dev
       - PORT=8000
-      - GCLOUD_PROJECT=attendance
+      - GCLOUD_PROJECT=attendence
     ports:
       - "9080:8000"
     volumes:
