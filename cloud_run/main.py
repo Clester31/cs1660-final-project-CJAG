@@ -10,7 +10,7 @@ from typing import Annotated
 app = FastAPI()
 
 # make sure to also mount any static files
-app.mount("/static", StaticFiles(directory="/app/static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 # init firestore client
