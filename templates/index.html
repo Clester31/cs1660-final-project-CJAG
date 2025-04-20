@@ -8,14 +8,16 @@
     <title>Class QR Code App</title>
 </head>
 <body class="bg-orange-100">
-    <nav class="flex flex-row items-center m-auto text-center justify-between bg-orange-300 p-4 text-white shadow-md">
+    <nav class="flex flex-row items-center m-auto text-center justify-center bg-orange-300 p-4 text-white shadow-md">
         <h1 class="text-2xl font-bold">Class QR Code App</h1>
         <!-- Instructor will need to sign in to generate the QR code -->
-        <button class="bg-blue-500 shadow-md px-4 py-2 text-white hover:bg-blue-400 transition 250 ease-in-out cursor-pointer rounded-xl">Instructor Sign-In</button>
+        <!-- <button class="bg-blue-500 shadow-md px-4 py-2 text-white hover:bg-blue-400 transition 250 ease-in-out cursor-pointer rounded-xl">Instructor Sign-In</button> -->
     </nav>
     <main>
         <div class="qr-code-section flex flex-col items-center justify-center mt-4">
             <h2 class="text-2xl font-bold">Scan the QR Code to be marked as present</h2>
+            <h2 class="mt-8">Sign in before being marked late:<span class="font-bold text-red-500">6:00 PM</span></h2>
+            <h3 class="italic">timer resets at 6:00 AM</h3>
             <img src="../assets/qr-code.png" alt="QR Code" class="m-auto mt-8 w-1/8">
             <h6 class="my-2 italic text-sm">Note: This is just a static image (as of now)</h6>
         </div>
