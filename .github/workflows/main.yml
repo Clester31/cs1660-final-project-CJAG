@@ -17,7 +17,8 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: attendencetracker-280595272990
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          service_account_key: ${{ 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 }}
+          #service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Configure Docker to use gcloud
         run: gcloud auth configure-docker
