@@ -15,9 +15,9 @@ services:
     ports:
       - "9080:8000"
     volumes:
-      - /Users/akshithaviswanadhula/Documents/GitHub/cs1660-final-project-CJAG/cloud_run:/cloud_run:Z
-      - /Users/akshithaviswanadhula/Documents/GitHub/cs1660-final-project-CJAG/static:/static:Z
-      - /Users/akshithaviswanadhula/Documents/GitHub/cs1660-final-project-CJAG/templates:/templates:Z
+      - cloud_run:/cloud_run:Z
+      - static:/static:Z
+      - templates:/templates:Z
 
   db:
     image: firestore
