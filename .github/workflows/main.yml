@@ -25,16 +25,16 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:latest .
+          docker build -t us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1
 
       - name: Push Docker image to Artifact Registry
         run: |
-          docker push us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:latest
+          docker push us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy attendencetracker \
-            --image us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:latest \
+            --image us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1 \
             --platform managed \
             --region us-central1 \
             --allow-unauthenticated
