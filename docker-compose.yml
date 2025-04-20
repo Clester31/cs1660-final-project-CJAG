@@ -15,9 +15,9 @@ services:
     ports:
       - "9080:8000"
     volumes:
-      - ./cloud_run:/app/cloud_run:Z
-      - ./static:/app/static:Z
-      - ./template:/app/templates:Z
+      - ./cloud_run:cloud_run:Z
+      - ./static:static:Z
+      - ./template:templates:Z
   db:
     image: firestore
     build:
