@@ -36,3 +36,6 @@ services:
 
 volumes:
   firestore:
+  cloud_run:
+  static:
+  templates:
