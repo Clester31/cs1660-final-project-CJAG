@@ -5,8 +5,10 @@
  */
 
 const config = {
-  apiKey: process.env.APIKEY,
-  authDomain: process.env.AUTHDOMAIN,
+  apiKey: "AIzaSyAzQh6QzrPzDHqM6BdV31egu-jCRy-qmDA",
+  authDomain: "attendence-tracker-457021.firebaseapp.com"
 };
+
+// NOTE: Github wont push local.env files. Just doing this for now
 
 // the stuff above is to initialize the Identity Platform Client SDK.
