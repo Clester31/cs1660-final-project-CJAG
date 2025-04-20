@@ -17,6 +17,10 @@ jobs:
           project_id: attendence-tracker-457021
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
+      - name: Activate service account
+        run: |
+          gcloud auth activate-service-account --key-file=${{ secrets.GCP_CREDENTIALS }}
+
       - name: Configure Docker to use gcloud
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
