@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: attendencetracker-280595272990
+          #service_account_key: ${{ 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 }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Configure Docker to use gcloud
+        run: gcloud auth configure-docker
+
+      - name: Build Docker image
+        run: |
+          docker build -t us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1 .
+
+      - name: Push Docker image to Artifact Registry
+        run: |
+          docker push us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy attendencetracker \
+            --image us-central1-docker.pkg.dev/attendencetracker-280595272990/docker-image/app:v1 \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated

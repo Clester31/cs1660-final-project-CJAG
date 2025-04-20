@@ -7,27 +7,29 @@ from google.cloud import firestore
 import datetime
 from typing import Annotated
 
+# Define literatls for attendance due date at 6 PM
+HOUR = 18  # must be in 24 hour format
+MINUTE = 0
+
 app = FastAPI()
 
-# make sure to also mount any static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# init firestore client
+# initalize firestore client
 db = firestore.Client()
 student_collection = db.collection("signed-in")
 
 # for testing purposes
 students_signed_in = [
-    {"name": "Student 1", "time": "12:00 PM"},  
-    {"name": "Student 2", "time": "12:05 PM"},
-    {"name": "Student 3", "time": "12:10 PM"},
+    {"name": "Student 1", "time": "12:00 PM", "attendance": True},  
+    {"name": "Student 2", "time": "12:05 PM", "attendance": True},
+    {"name": "Student 3", "time": "12:10 PM", "attendance": True},
 ]
 
 @app.get("/")
 async def read_root(request: Request):
     signed_in = student_collection.stream()
-    # @note: we are storing the votes in `vote_data` list because the firestore stream closes after certain period of time
     students_signed_in = []
     
     for s in signed_in:
@@ -39,11 +41,16 @@ async def read_root(request: Request):
     })
     
 @app.post("/")
-async def create_vote(name: Annotated[str, Form()]):
+async def create_sign_in(name: Annotated[str, Form()]):
+    # check sign in time
+    time  = datetime.datetime.utcnow()
+    class_start = datetime.datetime.combine(time.date(), datetime.time(HOUR, MINUTE))
 
+    # add attendance to database
     student_collection.add({
         "name": name,
-        "time": datetime.datetime.utcnow().isoformat()
+        "time": time.isoformat(),
+        "attendance": time > class_start
     })
     
     return {"message": f"Sign in for {name} received!"}
