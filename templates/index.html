@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Class QR Code App</title>
 </head>
+
 <body class="bg-orange-100">
     <nav class="flex flex-row items-center m-auto text-center justify-between bg-orange-300 p-4 text-white shadow-md">
         <h1 class="text-2xl font-bold">Class QR Code App</h1>
         <!-- Instructor will need to sign in to generate the QR code -->
-        <button class="student-log-in bg-blue-500 shadow-md px-4 py-2 text-white hover:bg-blue-400 transition 250 ease-in-out cursor-pointer rounded-xl">Student Log In</button>
+        <button
+            class="student-log-in bg-blue-500 shadow-md px-4 py-2 text-white hover:bg-blue-400 transition 250 ease-in-out cursor-pointer rounded-xl">Student
+            Log In</button>
     </nav>
     <main>
         <div class="qr-code-section flex flex-col items-center justify-center mt-4">
@@ -21,21 +25,26 @@
             <img src="../assets/qr-code.png" alt="QR Code" class="m-auto mt-8 w-1/8">
             <h6 class="my-2 italic text-sm">Note: This is just a static image (as of now)</h6>
         </div>
-        <div class="class-list flex flex-col items-center justify-center mt-4 bg-orange-200 w-1/2 m-auto p-4 rounded-lg shadow-md">
+        <div
+            class="class-list flex flex-col items-center justify-center mt-4 bg-orange-200 w-1/2 m-auto p-4 rounded-lg shadow-md">
             <h2 class="text-xl">Roster:</h2>
             <ul>
                 <!-- AJAX that will read from the main.py -->
                 {% for student in students_signed_in %}
-                    <li class="text-lg"><span class="font-semibold">{{ student.name }}</span> - {{ student.time }}</li>
+                <li class="text-lg"><span class="font-semibold">{{ student.name }}</span> - {{ student.time }}</li>
                 {% endfor %}
             </ul>
         </div>
     </main>
 </body>
 <script>
-    document.querySelector('.student-log-in').addEventListener('click', function() {
-        console.log("testing")
-        // link to firebase
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector('.student-log-in').addEventListener('click', function () {
+            console.log("testing")
+            // link to firebase
+        });
+    })
+
 </script>
+
 </html>
