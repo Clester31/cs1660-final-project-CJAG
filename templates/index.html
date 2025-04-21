@@ -6,17 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first-->
+    <script src="https://www.gstatic.com/firebasejs/7.18/firebase-app.js"></script>
+    <!-- Add Firebase Auth service-->
+    <script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script>
+    <script src="/static/config.js"></script>
+    <script src="/static/firebase.js"></script>
     <title>Class QR Code App</title>
 </head>
 
 <body class="bg-orange-100">
-    <nav class="flex flex-row items-center m-auto text-center justify-between bg-orange-300 p-4 text-white shadow-md">
-        <h1 class="text-2xl font-bold">Class QR Code App</h1>
-        <!-- Instructor will need to sign in to generate the QR code -->
-        <button
-            class="student-log-in bg-blue-500 shadow-md px-4 py-2 text-white hover:bg-blue-400 transition 250 ease-in-out cursor-pointer rounded-xl">Student
-            Log In</button>
-    </nav>
+    <nav class="flex items-center justify-between bg-orange-300 p-4 text-white shadow-lg">
+        <div class="container flex items-center">
+          <a class="text-2xl font-semibold hover:text-white" href="#!">Class QR Code App</a>
+        </div>
+        <ul class="flex items-center space-x-4">
+          <li>
+            <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full shadow-md focus:outline-none" id="signInButton">Sign In with Google</button>
+          </li>
+        </ul>
+      </nav>
     <main>
         <div class="qr-code-section flex flex-col items-center justify-center mt-4">
             <h2 class="text-2xl font-bold">Scan the QR Code to be marked as present</h2>
@@ -39,9 +48,10 @@
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        document.querySelector('.student-log-in').addEventListener('click', function () {
+        document.getElementById("signInButton").addEventListener('click', function () {
             console.log("testing")
-            // link to firebase
+            toggle()
+            attendance()
         });
     })
 
