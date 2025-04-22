@@ -6,6 +6,8 @@ Final project for CS 1660
 * Christian - Frontend
 * Julie - fASTAPI / python
 
+# Link
+https://attendencetracker-280595272990.us-central1.run.app/
 
 # Architecture
 
