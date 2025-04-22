@@ -1,26 +1,33 @@
+#triggers flow from a push to any branch
 on:
   push:
     branches:
       - '**'
-
+      
+# run on Ubuntu
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+# gets code from our repo 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
+
+# gives github perms to work w/ GCP
+#secret is in the json key - Christian put 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
             credentials_json: ${{ secrets.GCP_CREDENTIALS }}
-          
+
+#sets up GCP to automate
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: attendence-tracker-457021
 
+# allows docker to push images 
       - name: Configure Docker to use gcloud
         run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
