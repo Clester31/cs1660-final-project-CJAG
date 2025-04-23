@@ -57,7 +57,7 @@ function signIn() {
     .then(result => {
       // Returns the signed in user along with the provider's credential
       console.log(`${result.user.displayName} logged in.`);
-      window.alert(`Welcome ${result.user.displayName}!`);
+      window.alert(`${result.user.displayName} has signed in`);
     })
     .catch(err => {
       console.log(`Error during sign in: ${err.message}`);
@@ -111,6 +111,9 @@ async function attendance() {
       
       const profile = await res.json();
       const name = profile.names?.[0]?.displayName;
+
+      console.log('profile: ', profile);
+      console.log('name: ', name);
 
       const response = await fetch('/', {
           method: 'POST',
