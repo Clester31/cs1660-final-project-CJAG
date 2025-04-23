@@ -15,6 +15,8 @@ https://attendencetracker-280595272990.us-central1.run.app/
 
 # Project Description
 
-* Our group created a class attendance tracker for professors to use to track class attendance on the daily basis. Student's can access the website by scanning the QR code on the page. They then can log in through the website to have their attendance tracked/updated on the attendance log
+* Our group created a class attendance tracker for professors to use to track class attendance on the daily basis. Students can access the website by scanning the QR code on the page. They then can log in through the website to have their attendance tracked/updated on the attendance log. Our application tracks the student's name along with the time they signed into class. 
 
 # Reflection
+
+* While we are happy with our project, if we had more time, we would have implemented functionality to allow professors with multiple classes to track them all.
