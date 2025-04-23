@@ -85,7 +85,7 @@ function toggle() {
   } else {
     signOut();
   }
-  window.location.reload();
+  //window.location.reload();
 }
 
 /**
