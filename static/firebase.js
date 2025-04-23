@@ -24,21 +24,6 @@ function authDisabled() {
   return urlParams.get('auth') === 'false' && hostname === 'localhost';
 }
 
-// create ID token
-async function createIdToken() {
-  if (authDisabled()) {
-    console.warn('Auth is disabled. Returning dummy token.');
-    return 'dummyToken';
-  }
-
-  const token = localStorage.getItem('GPToken');
-  if (!token) {
-    throw new Error('No Google access token found in session storage.');
-  }
-
-  return token;
-}
-
 window.onload = function () {
   if (authDisabled()) {
     console.warn('Running with auth disabled.');
@@ -58,10 +43,11 @@ function signIn() {
     .auth()
     .signInWithPopup(provider)
     .then(result => {
+      // get the google access token for use with Google People API
       const credential = result.credential;
-      const GPToken = credential.accessToken;
-      //console.log("Google People Token:", GPToken);
-      localStorage.setItem('GPToken', GPToken);
+      const accessToken = credential.accessToken; 
+      //add the access token to local storage so we can use it after refresh
+      localStorage.setItem('accessToken', accessToken);
       console.log('local storage token:', localStorage.getItem('GPToken'));
 
       // Returns the signed in user along with the provider's credential
@@ -79,7 +65,7 @@ function signOut() {
     .auth()
     .signOut()
     .then(() => {
-      localStorage.removeItem('GPToken');
+      localStorage.removeItem('accessToken');
     })
     .catch(err => {
       console.log(`Error during sign out: ${err.message}`);
@@ -90,7 +76,7 @@ function signOut() {
 // Toggle Sign in/out button
 function toggle() {
   if (authDisabled()) {
-    window.alert('Auth is disabled.');
+    //window.alert('Auth is disabled.');
     return;
   }
   if (!firebase.auth().currentUser) {
@@ -106,12 +92,9 @@ function toggle() {
  * @returns {Promise<void>}
  */
 async function attendance() {
-  console.log(`Checking in the attendance`);
   if (firebase.auth().currentUser || authDisabled()) {
-    console.log("Attendance function called with");
-
     try {
-      const token = await createIdToken();
+      const token = localStorage.getItem('accessToken');
 
       //fetch name from google people api
       const res = await fetch('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses', {
@@ -145,8 +128,8 @@ async function attendance() {
       window.location.reload();
 
     } catch (err) {
-      console.log(`Error when submitting vote: ${err}`);
-      window.alert('Something went wrong... Please try again!');
+      console.log(`Error taking attendance: ${err}`);
+      window.alert('There was an error taking your attendance. Try again');
     }
   } else {
     window.alert('User not signed in.');
