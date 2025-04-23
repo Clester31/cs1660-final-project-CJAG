@@ -53,6 +53,7 @@ function signIn() {
       // Returns the signed in user along with the provider's credential
       console.log(`${result.user.displayName} logged in.`);
       window.alert(`${result.user.displayName} has signed in`);
+      attendance();
     })
     .catch(err => {
       console.log(`Error during sign in: ${err.message}`);
