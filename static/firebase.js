@@ -58,6 +58,7 @@ function signIn() {
       console.log(`Error during sign in: ${err.message}`);
       window.alert(`Sign in failed. Retry or check your browser logs.`);
     });
+    //window.location.reload();
 }
 
 function signOut() {
@@ -84,6 +85,7 @@ function toggle() {
   } else {
     signOut();
   }
+  window.location.reload();
 }
 
 /**
@@ -92,6 +94,7 @@ function toggle() {
  * @returns {Promise<void>}
  */
 async function attendance() {
+  console.log("tracking attendance")
   if (firebase.auth().currentUser || authDisabled()) {
     try {
       const token = localStorage.getItem('accessToken');
