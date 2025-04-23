@@ -31,7 +31,7 @@ async function createIdToken() {
     return 'dummyToken';
   }
 
-  const token = sessionStorage.getItem('googleAccessToken');
+  const token = sessionStorage.getItem('GPToken');
   if (!token) {
     throw new Error('No Google access token found in session storage.');
   }
