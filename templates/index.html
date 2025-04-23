@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first-->
     <script src="https://www.gstatic.com/firebasejs/7.18/firebase-app.js"></script>
-    <!-- Add Firebase Auth service-->
     <script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script>
     <script src="/static/config.js"></script>
     <script src="/static/firebase.js"></script>
@@ -16,6 +14,7 @@
 </head>
 
 <body class="bg-orange-100">
+    <!-- Simple Navbar -->
     <nav class="flex items-center justify-between bg-orange-300 p-4 text-white shadow-lg">
         <div class="container flex items-center">
           <a class="text-2xl font-semibold hover:text-white" href="#!">Class QR Code App</a>
@@ -27,6 +26,7 @@
         </ul>
       </nav>
     <main>
+        <!-- QR Code goes here -->
         <div class="qr-code-section flex flex-col items-center justify-center mt-4">
             <h2 class="text-2xl font-bold">Scan the QR Code to be marked as present</h2>
             <h2 class="mt-8">Sign in before being marked late:<span class="font-bold text-red-500">6:00 PM</span></h2>
@@ -46,6 +46,7 @@
     </main>
 </body>
 <script>
+    // Event listener for the sign in button
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("signInButton").addEventListener('click', function () {
             //console.log("testing")
