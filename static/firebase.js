@@ -7,11 +7,11 @@ function initApp() {
     if (user) {
       // User is signed in.
       signInButton.innerText = 'Sign Out';
-      //document.getElementById('form').style.display = '';
+      document.getElementById('form').style.display = '';
     } else {
       // No user is signed in.
       signInButton.innerText = 'Sign In with Google';
-      //document.getElementById('form').style.display = 'none';
+      document.getElementById('form').style.display = 'none';
     }
   });
 }
@@ -40,7 +40,7 @@ window.onload = function () {
   if (authDisabled()) {
     console.warn('Running with auth disabled.');
     document.getElementById('signInButton').innerText = '(Auth Disabled)';
-    //document.getElementById('form').style.display = '';
+    document.getElementById('form').style.display = '';
   } else {
     console.log('Running with auth enabled.');
     initApp();
