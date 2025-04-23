@@ -31,7 +31,7 @@ async function createIdToken() {
     return 'dummyToken';
   }
 
-  const token = sessionStorage.getItem('GPToken');
+  const token = localStorage.getItem('GPToken');
   if (!token) {
     throw new Error('No Google access token found in session storage.');
   }
@@ -60,8 +60,10 @@ function signIn() {
     .then(result => {
       const credential = result.credential;
       const GPToken = credential.accessToken;
-      console.log("Google People Token:", GPToken);
-      sessionStorage.setItem('GPToken', GPToken);
+      //console.log("Google People Token:", GPToken);
+      localStorage.setItem('GPToken', GPToken);
+      console.log('local storage token:', localStorage.getItem('GPToken'));
+
       // Returns the signed in user along with the provider's credential
       console.log(`${result.user.displayName} logged in.`);
       window.alert(`${result.user.displayName} has signed in`);
@@ -77,7 +79,7 @@ function signOut() {
     .auth()
     .signOut()
     .then(() => {
-      sessionStorage.removeItem('GPToken');
+      localStorage.removeItem('GPToken');
     })
     .catch(err => {
       console.log(`Error during sign out: ${err.message}`);
