@@ -29,3 +29,4 @@ https://attendencetracker-280595272990.us-central1.run.app/
 
 * While we are happy with our project, if we had more time, we would have implemented functionality to allow professors with multiple classes to track them all.
 * We were also thinking of adding a way to check users' identities to prevent any user from posting or altering our site.
+* We also would implement funcitonality on the front end so that students that login late would be marked late or absent 
