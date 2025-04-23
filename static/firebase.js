@@ -27,13 +27,16 @@ function authDisabled() {
 // create ID token
 async function createIdToken() {
   if (authDisabled()) {
-    console.warn('Auth is disabled. Returning dummy ID token.');
-    return new Promise((resolve) => {
-        resolve('dummyToken');  // return a dummy ID token
-    })
-  } else {
-    return await firebase.auth().currentUser.getIdToken();
+    console.warn('Auth is disabled. Returning dummy token.');
+    return 'dummyToken';
   }
+
+  const token = sessionStorage.getItem('googleAccessToken');
+  if (!token) {
+    throw new Error('No Google access token found in session storage.');
+  }
+
+  return token;
 }
 
 window.onload = function () {
@@ -55,6 +58,10 @@ function signIn() {
     .auth()
     .signInWithPopup(provider)
     .then(result => {
+      const credential = result.credential;
+      const GPToken = credential.accessToken;
+      console.log("Google People Token:", GPToken);
+      sessionStorage.setItem('GPToken', GPToken);
       // Returns the signed in user along with the provider's credential
       console.log(`${result.user.displayName} logged in.`);
       window.alert(`${result.user.displayName} has signed in`);
@@ -69,7 +76,9 @@ function signOut() {
   firebase
     .auth()
     .signOut()
-    .then(result => {})
+    .then(() => {
+      sessionStorage.removeItem('GPToken');
+    })
     .catch(err => {
       console.log(`Error during sign out: ${err.message}`);
       window.alert(`Sign out failed. Retry or check your browser logs.`);
@@ -97,18 +106,18 @@ function toggle() {
 async function attendance() {
   console.log(`Checking in the attendance`);
   if (firebase.auth().currentUser || authDisabled()) {
-    console.log("Attendance function called with"); 
+    console.log("Attendance function called with");
 
     try {
       const token = await createIdToken();
 
-    //fetch name from google people api
+      //fetch name from google people api
       const res = await fetch('https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      
+
       const profile = await res.json();
       const name = profile.names?.[0]?.displayName;
 
@@ -116,12 +125,12 @@ async function attendance() {
       console.log('name: ', name);
 
       const response = await fetch('/', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Authorization': `Bearer ${token}`
-          },
-          body: `name=${encodeURIComponent(name)}`
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${token}`
+        },
+        body: `name=${encodeURIComponent(name)}`
       });
 
 
@@ -132,7 +141,7 @@ async function attendance() {
       const data = await response.json();
 
       window.location.reload();
-      
+
     } catch (err) {
       console.log(`Error when submitting vote: ${err}`);
       window.alert('Something went wrong... Please try again!');
